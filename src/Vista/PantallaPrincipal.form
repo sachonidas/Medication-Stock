@@ -33,6 +33,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Borrar Medicamento"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuBajaMedicaci&#xf3;nActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="tablaMedicaci&#xf3;n">
               <Properties>
@@ -61,11 +64,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Maximos"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuModificarMinimos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Minimos"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuModificarMaximosActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

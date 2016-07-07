@@ -20,6 +20,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
      */
     public PantallaPrincipal() {
         initComponents();
+        setTitle("MedicationStock");
         //conexion.conectarBD();
     }
 
@@ -45,7 +46,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         mnuModificar = new javax.swing.JMenu();
         mnuModificarMedcamento = new javax.swing.JMenuItem();
         mnuModificarMaximos = new javax.swing.JMenuItem();
-        mnuModificarMinimos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,6 +100,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         mnuEditar.add(mnuAltaMedicación);
 
         mnuBajaMedicación.setText("Borrar Medicamento");
+        mnuBajaMedicación.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuBajaMedicaciónActionPerformed(evt);
+            }
+        });
         mnuEditar.add(mnuBajaMedicación);
 
         tablaMedicación.setText("tabla Medicamento");
@@ -123,10 +128,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         mnuModificar.add(mnuModificarMedcamento);
 
         mnuModificarMaximos.setText("Maximos");
+        mnuModificarMaximos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuModificarMaximosActionPerformed(evt);
+            }
+        });
         mnuModificar.add(mnuModificarMaximos);
-
-        mnuModificarMinimos.setText("Minimos");
-        mnuModificar.add(mnuModificarMinimos);
 
         jMenuBar1.add(mnuModificar);
 
@@ -164,6 +171,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         EditarMedicamento editar = new EditarMedicamento();
         editar.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_mnuModificarMedcamentoActionPerformed
+
+    private void mnuModificarMaximosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuModificarMaximosActionPerformed
+        // TODO add your handling code here:
+        EditarMaximos maximos = new EditarMaximos();
+        maximos.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuModificarMaximosActionPerformed
+
+    private void mnuBajaMedicaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBajaMedicaciónActionPerformed
+        // TODO add your handling code here:
+        BorrarMedicamento borrar = new BorrarMedicamento();
+        borrar.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuBajaMedicaciónActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,7 +231,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuModificar;
     private javax.swing.JMenuItem mnuModificarMaximos;
     private javax.swing.JMenuItem mnuModificarMedcamento;
-    private javax.swing.JMenuItem mnuModificarMinimos;
     private javax.swing.JPanel pnlContenedor;
     private javax.swing.JMenuItem tablaMedicación;
     // End of variables declaration//GEN-END:variables

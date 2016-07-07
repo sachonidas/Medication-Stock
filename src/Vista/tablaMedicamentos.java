@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import DB.CargaTablaMedicamentos;
 import DB.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,19 +23,28 @@ public class tablaMedicamentos extends javax.swing.JFrame {
 
     
     public DefaultTableModel modelo = new DefaultTableModel();
-    public String []datos = new String[4];
+    public String []datos = new String[6];
+    CargaTablaMedicamentos carga = new CargaTablaMedicamentos();
 
     /**
      * Creates new form tablaMedicamentos
      */
     public tablaMedicamentos() {
         initComponents();
+        mostrarDatos();
+        cargaTabla();
+        //carga.consultaMedicamentos();
+        
     }
 
     public void mostrarDatos(){
+        
         modelo.addColumn("MEDICAMENTO");
         modelo.addColumn("DOSIS");
         modelo.addColumn("CANTIDAD");
+        modelo.addColumn("MAXIMOS");
+        modelo.addColumn("MINMOS");
+        
         tblMedicamentos.setModel(modelo);
     }
     
@@ -43,17 +53,22 @@ public class tablaMedicamentos extends javax.swing.JFrame {
         Conexion conectar = new Conexion();        
         Statement st;
         try {
+            conectar.conectarBD();
             st = conectar.getConnection().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
-        while(rs.next()){
-            datos[0]=rs.getString(1);
-            datos[1]=rs.getString(2);
-            datos[2]=rs.getString(3);
-            datos[3]=rs.getString(4);
-            modelo.addRow(datos);
-        }
-        tblMedicamentos.setModel(modelo);
-        rs.close();
+            try (ResultSet rs = st.executeQuery("SELECT * FROM medicamentos")) {
+                while(rs.next()){
+                    datos[0]=rs.getString(1);
+                    datos[1]=rs.getString(2);
+                    datos[2]=rs.getString(3);
+                    datos[3]=rs.getString(4);
+                    datos[4]=rs.getString(5);
+                    datos[5]=rs.getString(6);
+                    modelo.addRow(datos);
+                }
+                tblMedicamentos.setModel(modelo);
+                rs.close();
+            }
+        conectar.desconexion();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex, null, WIDTH);
             
@@ -73,6 +88,7 @@ public class tablaMedicamentos extends javax.swing.JFrame {
         tblMedicamentos = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,6 +118,15 @@ public class tablaMedicamentos extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Volver");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -122,6 +147,13 @@ public class tablaMedicamentos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        PantallaPrincipal pantalla = new PantallaPrincipal();
+        pantalla.setVisible(rootPaneCheckingEnabled);
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,8 +194,9 @@ public class tablaMedicamentos extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblMedicamentos;
+    public javax.swing.JTable tblMedicamentos;
     // End of variables declaration//GEN-END:variables
 }

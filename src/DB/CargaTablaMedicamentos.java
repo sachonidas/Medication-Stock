@@ -9,6 +9,8 @@ import Acciones.Medicamento;
 import java.sql.SQLException;
 import java.sql.Statement;
 import Vista.tablaMedicamentos;
+import static java.awt.image.ImageObserver.WIDTH;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,7 +21,6 @@ import javax.swing.JOptionPane;
  */
 public class CargaTablaMedicamentos {
     
-    public tablaMedicamentos tabla = new tablaMedicamentos();
     
     public void cargaTabla(){
         
@@ -39,7 +40,7 @@ public class CargaTablaMedicamentos {
             conectar.desconexion();
         } catch (SQLException ex) {
             
-            JOptionPane.showMessageDialog(tabla, "Error tabla medicamentos \n"+ex);
+            JOptionPane.showMessageDialog(null, "Error tabla medicamentos \n"+ex);
             
         }
     }
@@ -60,6 +61,8 @@ public class CargaTablaMedicamentos {
                     + ",'"+medicamento.getMinimoMedicamento()+"')";
                 
             st.executeUpdate(sql);
+            
+            JOptionPane.showMessageDialog(null, "Medicamento creado");
             st.close();
             conectar.desconexion();
             
@@ -86,9 +89,9 @@ public class CargaTablaMedicamentos {
                     + ", minimo = '"+medicamento.getMinimoMedicamento()+"'"
                     + " where nombre = '"+medicamento.getNombreMedicamento()+"'");
             if (cantidad == 1) {
-                JOptionPane.showMessageDialog(tabla, "Medicamento modificado");
+                JOptionPane.showMessageDialog(null, "Medicamento modificado");
             }else{
-                JOptionPane.showMessageDialog(tabla, "Medicamento NO modificado");
+                JOptionPane.showMessageDialog(null, "Medicamento NO modificado");
             }
                 
             st.close();
@@ -98,6 +101,82 @@ public class CargaTablaMedicamentos {
             Logger.getLogger(CargaTablaMedicamentos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    
+    public void modificaLimites(Medicamento medicamento){
+        
+        Conexion conectar = new Conexion();        
+        Statement st;
+        
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            //int cantidad = comando.executeUpdate("UPDATE articulos SET nombre='"+producto.getDescripcionProducto()+"',precio='"+producto.getPrecioProducto()+"' WHERE codigo='"+producto.getCodigoProducto()+"'");
+
+            int cantidad = st.executeUpdate("update medicamentos set maximo = '"+medicamento.getMaximoMedicamento()+"'"
+                    + ", minimo = '"+medicamento.getMinimoMedicamento()+"'"
+                    + " where nombre = '"+medicamento.getNombreMedicamento()+"'");
+            if (cantidad == 1) {
+                JOptionPane.showMessageDialog(null, "Medicamento modificado");
+            }else{
+                JOptionPane.showMessageDialog(null, "Medicamento NO modificado");
+            }
+                
+            st.close();
+            conectar.desconexion();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CargaTablaMedicamentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    public void borraMedicamento(Medicamento medicamento){
+        
+        Conexion conectar = new Conexion();        
+        Statement st;
+        
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            st.executeUpdate("delete from medicamentos where nombre = '"+medicamento.getNombreMedicamento()+"'");
+            JOptionPane.showMessageDialog(null, "Medicamento borrado!");
+            st.close();
+            conectar.desconexion();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CargaTablaMedicamentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void consultaMedicamentos(){
+        
+        tablaMedicamentos medicamentos = new tablaMedicamentos();
+        
+        Conexion conectar = new Conexion();        
+        Statement st;
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
+        while(rs.next()){
+            medicamentos.datos[0]=rs.getString(1);
+            medicamentos.datos[1]=rs.getString(2);
+            medicamentos.datos[2]=rs.getString(3);
+            medicamentos.datos[3]=rs.getString(4);
+            medicamentos.modelo.addRow(medicamentos.datos);
+        }
+        medicamentos.tblMedicamentos.setModel(medicamentos.modelo);
+        conectar.desconexion();
+        rs.close();
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, null, WIDTH);
+            
+        }
     }
     
 }
