@@ -12,9 +12,19 @@ package Acciones;
 public class Medicamento {
     
     private String nombreMedicamento;
+    private String dosisMedicamento;
     private String cantidadMedicamento;
     private String maximoMedicamento;
     private String minimoMedicamento;
+
+    
+    public String getDosisMedicamento() {
+        return dosisMedicamento;
+    }
+
+    public void setDosisMedicamento(String dosisMedicamento) {
+        this.dosisMedicamento = dosisMedicamento;
+    }
 
     public String getNombreMedicamento() {
         return nombreMedicamento;

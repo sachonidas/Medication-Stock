@@ -5,17 +5,22 @@
  */
 package Vista;
 
+import DB.Conexion;
+
 /**
  *
  * @author Usuario
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
 
+    Conexion conexion;
+    
     /**
      * Creates new form PantallaPrincipal
      */
     public PantallaPrincipal() {
         initComponents();
+        //conexion.conectarBD();
     }
 
     /**
@@ -38,12 +43,21 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         mnuBajaMedicación = new javax.swing.JMenuItem();
         tablaMedicación = new javax.swing.JMenuItem();
         mnuModificar = new javax.swing.JMenu();
+        mnuModificarMedcamento = new javax.swing.JMenuItem();
         mnuModificarMaximos = new javax.swing.JMenuItem();
         mnuModificarMinimos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        pnlContenedor.setBackground(java.awt.SystemColor.activeCaption);
+
+        jButton1.setBackground(java.awt.Color.white);
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\l.arancibia\\Documents\\NetBeansProjects\\MedicationStock\\pildora.jpg")); // NOI18N
         jButton1.setText("Introducir Medicación");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jButton3.setText("Sacar Medicación");
 
@@ -63,8 +77,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlContenedorLayout.createSequentialGroup()
                 .addGap(181, 181, 181)
                 .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(196, 196, 196))
         );
 
@@ -77,18 +91,36 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         mnuEditar.setText("Medicamentos");
 
-        mnuAltaMedicación.setText("Alta Medicación");
+        mnuAltaMedicación.setText("Alta Medicamento");
+        mnuAltaMedicación.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAltaMedicaciónActionPerformed(evt);
+            }
+        });
         mnuEditar.add(mnuAltaMedicación);
 
-        mnuBajaMedicación.setText("Borrar Medicación");
+        mnuBajaMedicación.setText("Borrar Medicamento");
         mnuEditar.add(mnuBajaMedicación);
 
-        tablaMedicación.setText("tabla Medicación");
+        tablaMedicación.setText("tabla Medicamento");
+        tablaMedicación.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tablaMedicaciónActionPerformed(evt);
+            }
+        });
         mnuEditar.add(tablaMedicación);
 
         jMenuBar1.add(mnuEditar);
 
         mnuModificar.setText("Modificar");
+
+        mnuModificarMedcamento.setText("Modificar Medicamento");
+        mnuModificarMedcamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuModificarMedcamentoActionPerformed(evt);
+            }
+        });
+        mnuModificar.add(mnuModificarMedcamento);
 
         mnuModificarMaximos.setText("Maximos");
         mnuModificar.add(mnuModificarMaximos);
@@ -113,6 +145,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tablaMedicaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablaMedicaciónActionPerformed
+        // TODO add your handling code here:
+        tablaMedicamentos tabla = new tablaMedicamentos();
+        tabla.setVisible(rootPaneCheckingEnabled);
+        hide();
+    }//GEN-LAST:event_tablaMedicaciónActionPerformed
+
+    private void mnuAltaMedicaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAltaMedicaciónActionPerformed
+        // TODO add your handling code here:
+        AltaMedicamento alta = new AltaMedicamento();
+        alta.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuAltaMedicaciónActionPerformed
+
+    private void mnuModificarMedcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuModificarMedcamentoActionPerformed
+        // TODO add your handling code here:
+        EditarMedicamento editar = new EditarMedicamento();
+        editar.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuModificarMedcamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +211,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuEditar;
     private javax.swing.JMenu mnuModificar;
     private javax.swing.JMenuItem mnuModificarMaximos;
+    private javax.swing.JMenuItem mnuModificarMedcamento;
     private javax.swing.JMenuItem mnuModificarMinimos;
     private javax.swing.JPanel pnlContenedor;
     private javax.swing.JMenuItem tablaMedicación;

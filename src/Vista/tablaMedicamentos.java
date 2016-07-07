@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package medicationstock;
+package Vista;
 
 import DB.Conexion;
 import java.sql.ResultSet;
@@ -32,9 +32,9 @@ public class tablaMedicamentos extends javax.swing.JFrame {
     }
 
     public void mostrarDatos(){
-        modelo.addColumn("MEDICAMENTO");;
+        modelo.addColumn("MEDICAMENTO");
         modelo.addColumn("DOSIS");
-        modelo.addColumn("CANTIDAD");;
+        modelo.addColumn("CANTIDAD");
         tblMedicamentos.setModel(modelo);
     }
     

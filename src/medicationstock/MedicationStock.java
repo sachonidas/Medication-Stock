@@ -5,17 +5,24 @@
  */
 package medicationstock;
 
+import Vista.PantallaPrincipal;
+
+
 /**
  *
  * @author Usuario
  */
 public class MedicationStock {
 
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        PantallaPrincipal pantalla = new PantallaPrincipal();
+        pantalla.setVisible(true);
     }
     
 }

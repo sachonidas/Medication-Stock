@@ -5,9 +5,12 @@
  */
 package DB;
 
-import com.mysql.jdbc.Connection;
+
+import java.sql.*;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
+
+
 
 /**
  *
@@ -16,17 +19,20 @@ import javax.swing.JOptionPane;
 public class Conexion {
 
     Connection conectar;
+    
+    
     public Conexion(){
-        
+    }
+    
+    public void conectarBD(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bd1","root","");
             //Mensaje opcional que certifica que te has conectado a la base de datos.
-            //OptionPane.showMessageDialog(null, "Conectado!");
+//            JOptionPane.showMessageDialog(null, "Conectado!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: "+ e);
         }
-        
         
     }
     public Connection getConnection(){
