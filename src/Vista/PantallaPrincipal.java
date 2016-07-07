@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import DB.CargaTablaMedicamentos;
 import DB.Conexion;
 
 /**
@@ -14,6 +15,7 @@ import DB.Conexion;
 public class PantallaPrincipal extends javax.swing.JFrame {
 
     Conexion conexion;
+    CargaTablaMedicamentos carga = new CargaTablaMedicamentos();
     
     /**
      * Creates new form PantallaPrincipal
@@ -21,7 +23,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     public PantallaPrincipal() {
         initComponents();
         setTitle("MedicationStock");
-        //conexion.conectarBD();
+        carga.cargaTabla();
     }
 
     /**

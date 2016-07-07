@@ -27,6 +27,7 @@ public class CargaTablaMedicamentos {
         Conexion conectar = new Conexion();        
         Statement st;
         try {
+            conectar.conectarBD();
             st = conectar.getConnection().createStatement();
             String sql = "create table if not exists medicamentos"+
                     "(ID    INTEGER PRIMARY KEY NOT NULL,"+
@@ -35,7 +36,7 @@ public class CargaTablaMedicamentos {
                     " CANTIDAD          TEXT    NOT NULL,"+
                     " MAXIMO            TEXT    NOT NULL,"+
                     " MINIMO            TEXT    NOT NULL)";
-            st.executeQuery(sql);
+            st.execute(sql);
             st.close();
             conectar.desconexion();
         } catch (SQLException ex) {
