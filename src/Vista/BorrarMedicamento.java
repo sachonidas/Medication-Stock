@@ -22,6 +22,7 @@ public class BorrarMedicamento extends javax.swing.JFrame {
      */
     public BorrarMedicamento() {
         initComponents();
+        setTitle("Borrar Medicamento");
     }
 
     /**

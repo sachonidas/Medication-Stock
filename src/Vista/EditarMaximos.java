@@ -22,6 +22,7 @@ public class EditarMaximos extends javax.swing.JFrame {
      */
     public EditarMaximos() {
         initComponents();
+        setTitle("Editar Maximos");
     }
 
     /**

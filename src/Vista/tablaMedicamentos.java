@@ -33,6 +33,7 @@ public class tablaMedicamentos extends javax.swing.JFrame {
         initComponents();
         mostrarDatos();
         cargaTabla();
+        setTitle("Stock Medicamentos");
         //carga.consultaMedicamentos();
         
     }

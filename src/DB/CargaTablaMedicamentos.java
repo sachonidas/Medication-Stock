@@ -29,9 +29,10 @@ public class CargaTablaMedicamentos {
         try {
             conectar.conectarBD();
             st = conectar.getConnection().createStatement();
+            //PONER VALOR AUTOINCREMENT EN EL ID!
             String sql = "create table if not exists medicamentos"+
                     "(ID    INTEGER PRIMARY KEY NOT NULL,"+
-                    " MEDICAMENTO       TEXT    NOT NULL,"+
+                    " NOMBRE            TEXT    NOT NULL,"+
                     " DOSIS             TEXT    NOT NULL,"+
                     " CANTIDAD          TEXT    NOT NULL,"+
                     " MAXIMO            TEXT    NOT NULL,"+

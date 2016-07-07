@@ -22,6 +22,7 @@ public class EditarMedicamento extends javax.swing.JFrame {
      */
     public EditarMedicamento() {
         initComponents();
+        setTitle("Editar Medicamento");
     }
 
     /**
