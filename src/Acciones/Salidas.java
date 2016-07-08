@@ -14,6 +14,16 @@ public class Salidas {
     public String fechaSalida;
     public String nombreMediamento;
     public String cantidadSalida;
+    public String comentarioSalida;
+
+    public String getComentarioSalida() {
+        return comentarioSalida;
+    }
+
+    public void setComentarioSalida(String comentarioSalida) {
+        this.comentarioSalida = comentarioSalida;
+    }
+    
 
     public String getFechaSalida() {
         return fechaSalida;

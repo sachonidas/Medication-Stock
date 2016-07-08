@@ -27,7 +27,8 @@ public class TablaSalidas {
                     "(ID    INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,"+
                     " FECHA             TEXT    NOT NULL,"+
                     " NOMBRE            TEXT    NOT NULL,"+
-                    " CANTIDAD          TEXT    NOT NULL)";
+                    " CANTIDAD          TEXT    NOT NULL,"+
+                    " COMENTARIO        TEXT    NOT NULL)";
             st.execute(sql);
             st.close();
             conectar.desconexion();
@@ -45,7 +46,7 @@ public class TablaSalidas {
         try {
             conectar.conectarBD();
             st = conectar.getConnection().createStatement();
-            String sql = "insert into salidas (FECHA, NOMBRE, CANTIDAD)  values ('"+salidas.getFechaSalida()+"','"+salidas.getNombreMediamento()+"','"+salidas.getCantidadSalida()+"')";
+            String sql = "insert into salidas (FECHA, NOMBRE, CANTIDAD, COMENTARIO)  values ('"+salidas.getFechaSalida()+"','"+salidas.getNombreMediamento()+"','"+salidas.getCantidadSalida()+"','"+salidas.getComentarioSalida()+"')";
             st.executeUpdate(sql);
             st.close();
             conectar.desconexion();

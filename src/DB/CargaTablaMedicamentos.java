@@ -166,16 +166,93 @@ public class CargaTablaMedicamentos {
             ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
         while(rs.next()){
             
-            medicamentos.datos[0]=rs.getString(1);
-            medicamentos.datos[1]=rs.getString(2);
-            medicamentos.datos[2]=rs.getString(3);
-            medicamentos.datos[3]=rs.getString(4);
-            medicamentos.datos[4]=rs.getString(5);
-            medicamentos.datos[5]=rs.getString(6);
+            medicamentos.datos[0]=rs.getString(1); //ID
+            medicamentos.datos[1]=rs.getString(2); //NOMBRE
+            medicamentos.datos[2]=rs.getString(3); //DOSIS
+            medicamentos.datos[3]=rs.getString(4); //CANTIDAD
+            medicamentos.datos[4]=rs.getString(5); //MAXIMO
+            medicamentos.datos[5]=rs.getString(6); //MINIMO
 
             medicamentos.modelo.addRow(medicamentos.datos);
         }
+        
         medicamentos.tblMedicamentos.setModel(medicamentos.modelo);
+        conectar.desconexion();
+        rs.close();
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, null, WIDTH);
+            
+        }
+    }
+    
+    
+    public void entradaMedicamentos(String cantidad){
+        
+        String []datos = new String[6];
+        Medicamento medicamento = new Medicamento();
+        Conexion conectar = new Conexion();        
+        Statement st;
+        
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
+        while(rs.next()){
+            
+            medicamento.setNombreMedicamento(rs.getString(2));//NOMBRE
+            medicamento.setDosisMedicamento(rs.getString(3)); //DOSIS
+            medicamento.setCantidadMedicamento(rs.getString(4)); //CANTIDAD
+            medicamento.setMaximoMedicamento(rs.getString(5)); //MAXIMO
+            medicamento.setMinimoMedicamento(rs.getString(6)); //MINIMO
+
+        }
+        conectar.desconexion();
+        rs.close();
+        
+        int cantidadActual = Integer.valueOf(medicamento.getCantidadMedicamento());
+        JOptionPane.showMessageDialog(null, cantidadActual);
+        int cantidadEntrada = Integer.valueOf(cantidad);
+        JOptionPane.showMessageDialog(null, cantidadEntrada);
+        int cantidadFinal = cantidadActual + cantidadEntrada;
+        String cantidadActualizada = String.valueOf(cantidadFinal);
+        JOptionPane.showMessageDialog(null, cantidadFinal);
+        medicamento.setCantidadMedicamento(cantidadActualizada);
+        
+        
+        conectar.conectarBD();
+        st = conectar.getConnection().createStatement();
+        String sql = "update medicamentos set cantidad = '"+medicamento.getCantidadMedicamento()+"'"
+                    + " where nombre = '"+medicamento.getNombreMedicamento()+"')";
+        st.executeUpdate(sql);
+//            modificaMedicamento(medicamento);
+        
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, null, WIDTH);
+            
+        }
+    }
+    
+    public void salidaMedicamentos(){
+        
+        String []datos = new String[6];
+        Conexion conectar = new Conexion();        
+        Statement st;
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
+        while(rs.next()){
+            
+            datos[0]=rs.getString(1); //ID
+            datos[1]=rs.getString(2); //NOMBRE
+            datos[2]=rs.getString(3); //DOSIS
+            datos[3]=rs.getString(4); //CANTIDAD
+            datos[4]=rs.getString(5); //MAXIMO
+            datos[5]=rs.getString(6); //MINIMO
+        }
+        
         conectar.desconexion();
         rs.close();
         

@@ -5,12 +5,10 @@
  */
 package Vista;
 
-import Acciones.Entradas;
-import DB.CargaTablaMedicamentos;
+import Acciones.Salidas;
 import DB.Conexion;
-import DB.TablaEntradas;
+import DB.TablaSalidas;
 import com.toedter.calendar.JDateChooser;
-import java.awt.event.ItemListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,16 +16,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author l.arancibia
  */
-public class EntradaMedicamentos extends javax.swing.JFrame {
+public class SalidaMedicamentos extends javax.swing.JFrame {
     
-    Entradas entradas;
+    Salidas salidas;
     
     public String []medicamentos = new String [100];
     public String obtenNombre;
@@ -45,12 +42,12 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
     /**
      * Creates new form EntradaMedicamentos
      */
-    public EntradaMedicamentos() {
+    public SalidaMedicamentos() {
         initComponents();
-        setTitle("Entradas");
+        setTitle("Salidas");
         cargaCombo();
         
-        fechaEntrada.setDate(d);
+        fechaSalida.setDate(d);
     }
 
     /**
@@ -65,10 +62,13 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         cmbMedicacion = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        txtCantidadEntrada = new javax.swing.JTextField();
+        txtCantidadSalida = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        fechaEntrada = new com.toedter.calendar.JDateChooser();
+        fechaSalida = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtComentario = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuVolver = new javax.swing.JMenuItem();
@@ -98,39 +98,55 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Comentario:");
+
+        txtComentario.setColumns(20);
+        txtComentario.setRows(5);
+        jScrollPane1.setViewportView(txtComentario);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(71, 71, 71)
-                        .addComponent(txtCantidadEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cmbMedicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(71, 71, 71)
+                                .addComponent(txtCantidadSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbMedicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnAceptar)
+                                .addGap(38, 38, 38)
+                                .addComponent(btnCancelar))
+                            .addComponent(fechaSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAceptar)
-                        .addGap(38, 38, 38)
-                        .addComponent(btnCancelar))
-                    .addComponent(fechaEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(55, 55, 55)
+                        .addComponent(jScrollPane1)))
                 .addGap(162, 162, 162))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
+                .addGap(82, 82, 82)
                 .addComponent(cmbMedicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
+                .addGap(82, 82, 82)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(txtCantidadEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(fechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91)
+                        .addComponent(txtCantidadSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -180,24 +196,21 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        TablaEntradas tabla = new TablaEntradas();
-        CargaTablaMedicamentos medicamento = new CargaTablaMedicamentos();
-        entradas = new Entradas();
+        TablaSalidas tabla = new TablaSalidas();
+        salidas = new Salidas();
         
-        String obtenFecha = format1.format(fechaEntrada.getDate());
+        String obtenFecha = format1.format(fechaSalida.getDate());
         obtenNombre = String.valueOf(cmbMedicacion.getSelectedItem());
         
-        entradas.setNombreMediamento(obtenNombre);
-        entradas.setCantidadEntrada(txtCantidadEntrada.getText());
-        entradas.setFechaEntrada(obtenFecha);
+        salidas.setNombreMediamento(obtenNombre);
+        salidas.setCantidadSalida(txtCantidadSalida.getText());
+        salidas.setFechaSalida(obtenFecha);
+        salidas.setComentarioSalida(txtComentario.getText());
         
-        tabla.insertaEntrada(entradas);
-        medicamento.entradaMedicamentos(txtCantidadEntrada.getText());
+        tabla.insertaSalida(salidas);
         
-        txtCantidadEntrada.setText("");
-        
-        
-        
+        txtCantidadSalida.setText("");
+        txtComentario.setText("");
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cmbMedicacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMedicacionItemStateChanged
@@ -222,20 +235,21 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EntradaMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalidaMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EntradaMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalidaMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EntradaMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalidaMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EntradaMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalidaMedicamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EntradaMedicamentos().setVisible(true);
+                new SalidaMedicamentos().setVisible(true);
             }
         });
     }
@@ -267,11 +281,11 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
     }
 
     public JDateChooser getFechaEntrada() {
-        return fechaEntrada;
+        return fechaSalida;
     }
 
     public void setFechaEntrada(JDateChooser fechaEntrada) {
-        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaEntrada;
     }
     
 
@@ -279,13 +293,16 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbMedicacion;
-    private com.toedter.calendar.JDateChooser fechaEntrada;
+    private com.toedter.calendar.JDateChooser fechaSalida;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem mnuVolver;
-    private javax.swing.JTextField txtCantidadEntrada;
+    private javax.swing.JTextField txtCantidadSalida;
+    private javax.swing.JTextArea txtComentario;
     // End of variables declaration//GEN-END:variables
 }
