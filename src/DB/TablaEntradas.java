@@ -1,0 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DB;
+
+import Acciones.Entradas;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author l.arancibia
+ */
+public class TablaEntradas {
+    
+    public void cargaTabla(){
+        
+        Conexion conectar = new Conexion();        
+        Statement st;
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            //PONER VALOR AUTOINCREMENT EN EL ID!
+            String sql = "create table if not exists entradas"+
+                    "(ID    INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,"+
+                    " FECHA             TEXT    NOT NULL,"+
+                    " NOMBRE            TEXT    NOT NULL,"+
+                    " CANTIDAD          TEXT    NOT NULL)";
+            st.execute(sql);
+            st.close();
+            conectar.desconexion();
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error tabla medicamentos \n"+ex);
+            
+        }
+    }
+    
+    public void insertaEntrada(Entradas entradas){
+        
+        Conexion conectar = new Conexion();
+        Statement st;
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            String sql = "insert into entradas (FECHA, NOMBRE, CANTIDAD)  values ('"+entradas.getFechaEntrada()+"','"+entradas.getNombreMediamento()+"','"+entradas.getCantidadEntrada()+"')";
+            st.executeUpdate(sql);
+            st.close();
+            conectar.desconexion();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error Entradas: "+e);
+        }
+        
+    }
+    
+    
+    
+}

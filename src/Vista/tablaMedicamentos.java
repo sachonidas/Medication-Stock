@@ -40,6 +40,7 @@ public class tablaMedicamentos extends javax.swing.JFrame {
 
     public void mostrarDatos(){
         
+        modelo.addColumn("REFERENCIA");
         modelo.addColumn("MEDICAMENTO");
         modelo.addColumn("DOSIS");
         modelo.addColumn("CANTIDAD");
@@ -58,12 +59,14 @@ public class tablaMedicamentos extends javax.swing.JFrame {
             st = conectar.getConnection().createStatement();
             try (ResultSet rs = st.executeQuery("SELECT * FROM medicamentos")) {
                 while(rs.next()){
+                    
                     datos[0]=rs.getString(1);
                     datos[1]=rs.getString(2);
                     datos[2]=rs.getString(3);
                     datos[3]=rs.getString(4);
                     datos[4]=rs.getString(5);
                     datos[5]=rs.getString(6);
+                    
                     modelo.addRow(datos);
                 }
                 tblMedicamentos.setModel(modelo);
@@ -94,6 +97,7 @@ public class tablaMedicamentos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tblMedicamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -115,7 +119,7 @@ public class tablaMedicamentos extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
 
         jMenu1.setText("File");

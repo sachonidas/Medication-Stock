@@ -54,34 +54,45 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         pnlContenedor.setBackground(java.awt.SystemColor.activeCaption);
 
         jButton1.setBackground(java.awt.Color.white);
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\l.arancibia\\Documents\\NetBeansProjects\\MedicationStock\\pildora.jpg")); // NOI18N
-        jButton1.setText("Introducir Medicación");
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\l.arancibia\\Documents\\NetBeansProjects\\MedicationStock\\entrada1.png")); // NOI18N
+        jButton1.setText("Entradas");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Sacar Medicación");
+        jButton3.setBackground(java.awt.Color.white);
+        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\l.arancibia\\Documents\\NetBeansProjects\\MedicationStock\\salida.jpg")); // NOI18N
+        jButton3.setText("Salidas");
+        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
         pnlContenedor.setLayout(pnlContenedorLayout);
         pnlContenedorLayout.setHorizontalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
+                .addGap(140, 140, 140)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addGap(95, 95, 95)
                 .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                .addGap(180, 180, 180))
+                .addGap(181, 181, 181))
         );
         pnlContenedorLayout.setVerticalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorLayout.createSequentialGroup()
-                .addGap(181, 181, 181)
+                .addGap(182, 182, 182)
                 .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(196, 196, 196))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
 
         mnuArchivo.setText("Archivo");
@@ -185,6 +196,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         BorrarMedicamento borrar = new BorrarMedicamento();
         borrar.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_mnuBajaMedicaciónActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        EntradaMedicamentos entrada = new EntradaMedicamentos();
+        entrada.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

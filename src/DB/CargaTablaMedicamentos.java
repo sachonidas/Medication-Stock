@@ -31,7 +31,7 @@ public class CargaTablaMedicamentos {
             st = conectar.getConnection().createStatement();
             //PONER VALOR AUTOINCREMENT EN EL ID!
             String sql = "create table if not exists medicamentos"+
-                    "(ID    INTEGER PRIMARY KEY NOT NULL,"+
+                    "(ID    INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,"+
                     " NOMBRE            TEXT    NOT NULL,"+
                     " DOSIS             TEXT    NOT NULL,"+
                     " CANTIDAD          TEXT    NOT NULL,"+
@@ -165,10 +165,14 @@ public class CargaTablaMedicamentos {
             st = conectar.getConnection().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
         while(rs.next()){
+            
             medicamentos.datos[0]=rs.getString(1);
             medicamentos.datos[1]=rs.getString(2);
             medicamentos.datos[2]=rs.getString(3);
             medicamentos.datos[3]=rs.getString(4);
+            medicamentos.datos[4]=rs.getString(5);
+            medicamentos.datos[5]=rs.getString(6);
+
             medicamentos.modelo.addRow(medicamentos.datos);
         }
         medicamentos.tblMedicamentos.setModel(medicamentos.modelo);
