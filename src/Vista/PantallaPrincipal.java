@@ -232,8 +232,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     private void mnuAltaMedicaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAltaMedicaciónActionPerformed
         // TODO add your handling code here:
-        AltaMedicamento alta = new AltaMedicamento();
-        alta.setVisible(rootPaneCheckingEnabled);
+        VerificaID verifica = new VerificaID();
+        verifica.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_mnuAltaMedicaciónActionPerformed
 
     private void mnuModificarMedcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuModificarMedcamentoActionPerformed

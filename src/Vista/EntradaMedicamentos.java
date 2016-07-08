@@ -192,7 +192,7 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
         entradas.setFechaEntrada(obtenFecha);
         
         tabla.insertaEntrada(entradas);
-        medicamento.entradaMedicamentos(txtCantidadEntrada.getText());
+        medicamento.entradaMedicamentos(txtCantidadEntrada.getText(),obtenNombre);
         
         txtCantidadEntrada.setText("");
         

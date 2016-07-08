@@ -186,18 +186,18 @@ public class CargaTablaMedicamentos {
         }
     }
     
+    Medicamento medicamento;
     
-    public void entradaMedicamentos(String cantidad){
+    public void entradaMedicamentos(String cantidad, String nombre){
         
-        String []datos = new String[6];
-        Medicamento medicamento = new Medicamento();
+        medicamento = new Medicamento();
         Conexion conectar = new Conexion();        
         Statement st;
         
         try {
             conectar.conectarBD();
             st = conectar.getConnection().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
+            ResultSet rs = st.executeQuery("SELECT * FROM medicamentos where nombre='"+nombre+"'");
         while(rs.next()){
             
             medicamento.setNombreMedicamento(rs.getString(2));//NOMBRE
@@ -205,10 +205,9 @@ public class CargaTablaMedicamentos {
             medicamento.setCantidadMedicamento(rs.getString(4)); //CANTIDAD
             medicamento.setMaximoMedicamento(rs.getString(5)); //MAXIMO
             medicamento.setMinimoMedicamento(rs.getString(6)); //MINIMO
-
+            break;
         }
-        conectar.desconexion();
-        rs.close();
+        
         
         int cantidadActual = Integer.valueOf(medicamento.getCantidadMedicamento());
         JOptionPane.showMessageDialog(null, cantidadActual);
@@ -220,14 +219,14 @@ public class CargaTablaMedicamentos {
         medicamento.setCantidadMedicamento(cantidadActualizada);
         
         
-        conectar.conectarBD();
         st = conectar.getConnection().createStatement();
         String sql = "update medicamentos set cantidad = '"+medicamento.getCantidadMedicamento()+"'"
-                    + " where nombre = '"+medicamento.getNombreMedicamento()+"')";
+                    + " where nombre = '"+medicamento.getNombreMedicamento()+"'";
         st.executeUpdate(sql);
 //            modificaMedicamento(medicamento);
         
-        
+        conectar.desconexion();
+        rs.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, null, WIDTH);
             
