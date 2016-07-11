@@ -12,9 +12,18 @@ package Acciones;
 public class Entradas {
     
     public String fechaEntrada;
+    public String fechaCaducidad;
     public String nombreMediamento;
     public String cantidadEntrada;
 
+    public String getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setFechaCaducidad(String fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
+    }
+    
     public String getFechaEntrada() {
         return fechaEntrada;
     }

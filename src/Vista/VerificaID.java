@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +16,7 @@ public class VerificaID extends javax.swing.JFrame {
 
     
     private static final String USUARIO = "carmen";
-    private static final String PASS = "paton2016";
+    private static final String PASS = "Patton2016";
     /**
      * Creates new form VerificaID
      */
@@ -51,6 +52,11 @@ public class VerificaID extends javax.swing.JFrame {
         btnAcpetar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcpetarActionPerformed(evt);
+            }
+        });
+        btnAcpetar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnAcpetarKeyTyped(evt);
             }
         });
 
@@ -106,13 +112,17 @@ public class VerificaID extends javax.swing.JFrame {
     private void btnAcpetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcpetarActionPerformed
         // TODO add your handling code here:
         AltaMedicamento alta = new AltaMedicamento();
-        if (txtUsuario.getText().equals(USUARIO) && txtContraseña.getText().equals(PASS)) {
-           alta.setVisible(rootPaneCheckingEnabled);
-           dispose();
+        if (txtUsuario.getText().isEmpty() || txtContraseña.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debes rellenar los campos");
         }else{
-            JOptionPane.showMessageDialog(null, "Error al introducir el usuario ó la contraseña");
-            txtUsuario.setText("");
-            txtContraseña.setText("");
+            if (txtUsuario.getText().equals(USUARIO) && txtContraseña.getText().equals(PASS)) {
+               alta.setVisible(rootPaneCheckingEnabled);
+               dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al introducir el usuario ó la contraseña");
+                txtUsuario.setText("");
+                txtContraseña.setText("");
+            }
         }
     }//GEN-LAST:event_btnAcpetarActionPerformed
 
@@ -120,6 +130,23 @@ public class VerificaID extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAcpetarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAcpetarKeyTyped
+        // TODO add your handling code here:
+        AltaMedicamento alta = new AltaMedicamento();
+        if (txtUsuario.getText().isEmpty() || txtContraseña.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debes rellenar los campos");
+        }else{
+            if (txtUsuario.getText().equals(USUARIO) && txtContraseña.getText().equals(PASS)) {
+               alta.setVisible(rootPaneCheckingEnabled);
+               dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al introducir el usuario ó la contraseña");
+                txtUsuario.setText("");
+                txtContraseña.setText("");
+            }
+        }
+    }//GEN-LAST:event_btnAcpetarKeyTyped
 
     /**
      * @param args the command line arguments

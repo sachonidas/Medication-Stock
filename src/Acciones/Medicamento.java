@@ -16,7 +16,24 @@ public class Medicamento {
     private String cantidadMedicamento;
     private String maximoMedicamento;
     private String minimoMedicamento;
+    private String fechaCaducidad;
+    private String comentarioMedicamento;
 
+    public String getComentarioMedicamento() {
+        return comentarioMedicamento;
+    }
+
+    public void setComentarioMedicamento(String comentarioMedicamento) {
+        this.comentarioMedicamento = comentarioMedicamento;
+    }
+
+    public String getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setFechaCaducidad(String fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
+    }
     
     public String getDosisMedicamento() {
         return dosisMedicamento;

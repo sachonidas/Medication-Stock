@@ -36,7 +36,9 @@ public class CargaTablaMedicamentos {
                     " DOSIS             TEXT    NOT NULL,"+
                     " CANTIDAD          TEXT    NOT NULL,"+
                     " MAXIMO            TEXT    NOT NULL,"+
-                    " MINIMO            TEXT    NOT NULL)";
+                    " MINIMO            TEXT    NOT NULL "+
+                    " COMENTARIO        TEXT    NOT NULL "+
+                    " CADUCIDAD         TEXT    NOT NULL)";
             st.execute(sql);
             st.close();
             conectar.desconexion();
@@ -55,12 +57,14 @@ public class CargaTablaMedicamentos {
         try {
             conectar.conectarBD();
             st = conectar.getConnection().createStatement();
-            String sql = "insert into medicamentos (nombre, dosis, cantidad, maximo, minimo) "
+            String sql = "insert into medicamentos (nombre, dosis, cantidad, maximo, minimo,comentario, caducidad) "
                     + "values('"+medicamento.getNombreMedicamento()+"'"
                     + ",'"+medicamento.getDosisMedicamento()+"'"
                     + ",'"+medicamento.getCantidadMedicamento()+"'"
                     + ",'"+medicamento.getMaximoMedicamento()+"'"
-                    + ",'"+medicamento.getMinimoMedicamento()+"')";
+                    + ",'"+medicamento.getMinimoMedicamento()+"'"
+                    + ",'"+medicamento.getComentarioMedicamento()+"'"
+                    + ",'"+medicamento.getFechaCaducidad()+"')";
                 
             st.executeUpdate(sql);
             
@@ -89,6 +93,7 @@ public class CargaTablaMedicamentos {
                     + ", cantidad = '"+medicamento.getCantidadMedicamento()+"'"
                     + ", maximo = '"+medicamento.getMaximoMedicamento()+"'"
                     + ", minimo = '"+medicamento.getMinimoMedicamento()+"'"
+                    + ", minimo = '"+medicamento.getFechaCaducidad()+"'"
                     + " where nombre = '"+medicamento.getNombreMedicamento()+"'");
             if (cantidad == 1) {
                 JOptionPane.showMessageDialog(null, "Medicamento modificado");
