@@ -64,7 +64,8 @@ public class AltaMedicamento extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtComentarioMedicamento = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mnuArchivo = new javax.swing.JMenu();
+        mnuVolver = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -182,10 +183,19 @@ public class AltaMedicamento extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        mnuArchivo.setText("Archivo");
 
-        jMenu2.setText("Edit");
+        mnuVolver.setText("Volver");
+        mnuVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuVolverActionPerformed(evt);
+            }
+        });
+        mnuArchivo.add(mnuVolver);
+
+        jMenuBar1.add(mnuArchivo);
+
+        jMenu2.setText("Editar");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -241,6 +251,11 @@ public class AltaMedicamento extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void mnuVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVolverActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_mnuVolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,11 +301,12 @@ public class AltaMedicamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu mnuArchivo;
+    private javax.swing.JMenuItem mnuVolver;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextArea txtComentarioMedicamento;
     private javax.swing.JTextField txtDosis;

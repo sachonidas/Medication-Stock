@@ -36,8 +36,8 @@ public class CargaTablaMedicamentos {
                     " DOSIS             TEXT    NOT NULL,"+
                     " CANTIDAD          TEXT    NOT NULL,"+
                     " MAXIMO            TEXT    NOT NULL,"+
-                    " MINIMO            TEXT    NOT NULL "+
-                    " COMENTARIO        TEXT    NOT NULL "+
+                    " MINIMO            TEXT    NOT NULL,"+
+                    " COMENTARIO        TEXT    NOT NULL,"+
                     " CADUCIDAD         TEXT    NOT NULL)";
             st.execute(sql);
             st.close();
@@ -57,7 +57,7 @@ public class CargaTablaMedicamentos {
         try {
             conectar.conectarBD();
             st = conectar.getConnection().createStatement();
-            String sql = "insert into medicamentos (nombre, dosis, cantidad, maximo, minimo,comentario, caducidad) "
+            String sql = "insert into medicamentos (nombre, dosis, cantidad, maximo, minimo,comentario, caducidad)"
                     + "values('"+medicamento.getNombreMedicamento()+"'"
                     + ",'"+medicamento.getDosisMedicamento()+"'"
                     + ",'"+medicamento.getCantidadMedicamento()+"'"
@@ -93,7 +93,7 @@ public class CargaTablaMedicamentos {
                     + ", cantidad = '"+medicamento.getCantidadMedicamento()+"'"
                     + ", maximo = '"+medicamento.getMaximoMedicamento()+"'"
                     + ", minimo = '"+medicamento.getMinimoMedicamento()+"'"
-                    + ", minimo = '"+medicamento.getFechaCaducidad()+"'"
+                    + ", caducidad = '"+medicamento.getFechaCaducidad()+"'"
                     + " where nombre = '"+medicamento.getNombreMedicamento()+"'");
             if (cantidad == 1) {
                 JOptionPane.showMessageDialog(null, "Medicamento modificado");
@@ -177,6 +177,8 @@ public class CargaTablaMedicamentos {
             medicamentos.datos[3]=rs.getString(4); //CANTIDAD
             medicamentos.datos[4]=rs.getString(5); //MAXIMO
             medicamentos.datos[5]=rs.getString(6); //MINIMO
+            medicamentos.datos[6]=rs.getString(7); //COMENTARIO
+            medicamentos.datos[6]=rs.getString(7); //CADUCIDAD
 
             medicamentos.modelo.addRow(medicamentos.datos);
         }
