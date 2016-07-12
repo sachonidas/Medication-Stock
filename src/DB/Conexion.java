@@ -25,8 +25,13 @@ public class Conexion {
     }
     
     public void conectarBD(){
+        
+        Statement st;
         try {
             Class.forName("com.mysql.jdbc.Driver");
+//            st = conectar.createStatement();
+//            String sql = "CREATE DATABASE IF NOT EXISTS bd1";
+//            st.execute(sql);
             conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bd1","root","");
             //Mensaje opcional que certifica que te has conectado a la base de datos.
 //            JOptionPane.showMessageDialog(null, "Conectado!");
