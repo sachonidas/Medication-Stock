@@ -29,7 +29,6 @@ public class CargaTablaMedicamentos {
         try {
             conectar.conectarBD();
             st = conectar.getConnection().createStatement();
-            //PONER VALOR AUTOINCREMENT EN EL ID!
             String sql = "create table if not exists medicamentos"+
                     "(ID    INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,"+
                     " NOMBRE            TEXT    NOT NULL,"+
@@ -267,5 +266,31 @@ public class CargaTablaMedicamentos {
             
         }
     }
+    
+    /*public void verificaCaducidad(String fechaComprueba){
+        String []datos = new String[6];
+        Conexion conectar = new Conexion();        
+        Statement st;
+        
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
+            while(rs.next()){
+                for (int i = 1; i < datos.length; i++) {
+                    datos[i-1] = rs.getString("CADUCIDAD");
+                }
+                
+            }
+            conectar.desconexion();
+            rs.close();
+        } catch (Exception e) {
+        }
+        for (int i = 0; i < datos.length; i++) {
+            if (datos[i].equals(fechaComprueba)) {
+                JOptionPane.showMessageDialog(null, "Medicamento a punto de caducar");
+            }
+        }
+    }*/
     
 }

@@ -20,7 +20,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     CargaTablaMedicamentos carga = new CargaTablaMedicamentos();
     TablaEntradas entradas = new TablaEntradas();
     TablaSalidas salidas = new TablaSalidas();
-    
+    String fecha = "11-12-2016";
     
     /**
      * Creates new form PantallaPrincipal
@@ -31,6 +31,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         carga.cargaTabla();
         entradas.cargaTabla();
         salidas.cargaTabla();
+        //carga.verificaCaducidad(fecha);
     }
 
     /**
