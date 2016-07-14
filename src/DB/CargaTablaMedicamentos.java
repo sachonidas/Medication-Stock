@@ -11,6 +11,7 @@ import java.sql.Statement;
 import Vista.tablaMedicamentos;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.ResultSet;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;

@@ -20,7 +20,7 @@ public class Conexion {
 
     Connection conectar;
     
-    
+    String PASS = "";
     public Conexion(){
     }
     
@@ -28,15 +28,17 @@ public class Conexion {
         
         Statement st;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-//            st = conectar.createStatement();
-//            String sql = "CREATE DATABASE IF NOT EXISTS bd1";
-//            st.execute(sql);
-            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bd1","root","");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/bd1","root",PASS);
             //Mensaje opcional que certifica que te has conectado a la base de datos.
 //            JOptionPane.showMessageDialog(null, "Conectado!");
+            st = conectar.createStatement();
+      
+            String sql = "CREATE DATABASE IF NOT EXISTS bd1";
+            st.executeUpdate(sql);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: "+ e);
+            e.printStackTrace();
         }
         
     }
