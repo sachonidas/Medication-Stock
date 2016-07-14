@@ -29,7 +29,7 @@ public class Conexion {
         Statement st;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/bd1;create=true","root",PASS);
+            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/bd1","root",PASS);
             //Mensaje opcional que certifica que te has conectado a la base de datos.
 //            JOptionPane.showMessageDialog(null, "Conectado!");
 //            st = conectar.createStatement();
