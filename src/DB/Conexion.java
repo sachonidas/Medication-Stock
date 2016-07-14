@@ -29,13 +29,16 @@ public class Conexion {
         Statement st;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/bd1","root",PASS);
+            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306","root",PASS);
             //Mensaje opcional que certifica que te has conectado a la base de datos.
 //            JOptionPane.showMessageDialog(null, "Conectado!");
-//            st = conectar.createStatement();
-//      
-//            String sql = "CREATE DATABASE IF NOT EXISTS bd1";
-//            st.executeUpdate(sql);
+            st = conectar.createStatement();
+            String sql = "CREATE DATABASE IF NOT EXISTS bd1";
+            st.executeUpdate(sql);
+            String sql1 = "USE bd1";
+            st.executeUpdate(sql1);
+            
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: "+ e);
             e.printStackTrace();
