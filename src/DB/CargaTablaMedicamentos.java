@@ -270,6 +270,7 @@ public class CargaTablaMedicamentos {
     
     /*public void verificaCaducidad(String fechaComprueba){
         String []datos = new String[6];
+        String []caducados = new String[60];
         Conexion conectar = new Conexion();        
         Statement st;
         
@@ -288,7 +289,8 @@ public class CargaTablaMedicamentos {
         } catch (Exception e) {
         }
         for (int i = 0; i < datos.length; i++) {
-            if (datos[i].equals(fechaComprueba)) {
+            if (datos[i].equals("mes")) {
+                
                 JOptionPane.showMessageDialog(null, "Medicamento a punto de caducar");
             }
         }
