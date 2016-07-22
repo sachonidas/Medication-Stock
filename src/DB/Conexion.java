@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
 
-    Connection conectar;
-    
+    Connection conectar = null;
+    Statement st = null;    
     String PASS = "";
     public Conexion(){
     }

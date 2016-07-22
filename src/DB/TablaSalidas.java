@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author l.arancibia
  */
 public class TablaSalidas {
+    
     public void cargaTabla(){
         
         Conexion conectar = new Conexion();        
