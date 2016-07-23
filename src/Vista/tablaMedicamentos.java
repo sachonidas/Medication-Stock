@@ -7,6 +7,7 @@ package Vista;
 
 import DB.CargaTablaMedicamentos;
 import DB.Conexion;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,7 +24,8 @@ public class tablaMedicamentos extends javax.swing.JFrame {
 
     
     public DefaultTableModel modelo = new DefaultTableModel();
-    public String []datos = new String[6];
+    public String []datos = new String[7];
+    public String []pocos = new String[10000];
     CargaTablaMedicamentos carga = new CargaTablaMedicamentos();
 
     /**
@@ -35,6 +37,7 @@ public class tablaMedicamentos extends javax.swing.JFrame {
         cargaTabla();
         setTitle("Stock Medicamentos");
         //carga.consultaMedicamentos();
+        //compruebaTabla();
         
     }
 
@@ -45,7 +48,7 @@ public class tablaMedicamentos extends javax.swing.JFrame {
         modelo.addColumn("DOSIS");
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("MAXIMOS");
-        modelo.addColumn("MINMOS");
+        modelo.addColumn("MINIMOS");
         
         tblMedicamentos.setModel(modelo);
     }
@@ -59,24 +62,53 @@ public class tablaMedicamentos extends javax.swing.JFrame {
             st = conectar.getConnection().createStatement();
             try (ResultSet rs = st.executeQuery("SELECT * FROM medicamentos")) {
                 while(rs.next()){
+                    int i = 0;
+                    datos[0]=rs.getString(1); //ID
+                    datos[1]=rs.getString(2); //MEDICAMENTO
+                    datos[2]=rs.getString(3); //DOSIS
+                    datos[3]=rs.getString(4); //CANTIDAD
+                    datos[4]=rs.getString(5); //MAXIMOS
+                    datos[5]=rs.getString(6); //MINIMOS
                     
-                    datos[0]=rs.getString(1);
-                    datos[1]=rs.getString(2);
-                    datos[2]=rs.getString(3);
-                    datos[3]=rs.getString(4);
-                    datos[4]=rs.getString(5);
-                    datos[5]=rs.getString(6);
-                    
-                    modelo.addRow(datos);
+                    int cantidad = Integer.valueOf(datos[3]);
+                    int maximos = Integer.valueOf(datos[4]);
+                    int minimos = Integer.valueOf(datos[5]);
+                    System.out.println(cantidad+" + "+maximos+" + "+minimos);
+                    if (cantidad < minimos) {
+                        modelo.addRow(datos);
+                        System.out.println("Falta Medicamento "+datos[1]);
+                        JOptionPane.showMessageDialog(jPanel1, "Falta Medicamento "+datos[1]);
+                        pocos[i] = datos[1];
+                    }else {
+                        modelo.addRow(datos);
+                        setBackground(Color.yellow);
+                        System.out.println("En rango");
+                    }
+                    i++;
                 }
-                tblMedicamentos.setModel(modelo);
+                
                 rs.close();
+                tblMedicamentos.setModel(modelo);
+                
             }
         conectar.desconexion();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex, null, WIDTH);
             
         }
+    }
+    
+    public void compruebaTabla(){
+        int columna = modelo.getColumnCount();
+        int row = modelo.getRowCount();
+        int[] valor1 = new int[1000];
+        
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < columna; j++) {
+                
+            }
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.

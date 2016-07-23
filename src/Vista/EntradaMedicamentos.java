@@ -10,7 +10,6 @@ import DB.CargaTablaMedicamentos;
 import DB.Conexion;
 import DB.TablaEntradas;
 import com.toedter.calendar.JDateChooser;
-import java.awt.event.ItemListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -217,8 +215,7 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
         medicamento.entradaMedicamentos(txtCantidadEntrada.getText(),obtenNombre);
         
         txtCantidadEntrada.setText("");
-        
-        
+        txtFechaCaducidad.removeAll();
         
     }//GEN-LAST:event_btnAceptarActionPerformed
 

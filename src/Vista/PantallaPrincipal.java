@@ -9,6 +9,11 @@ import DB.CargaTablaMedicamentos;
 import DB.Conexion;
 import DB.TablaEntradas;
 import DB.TablaSalidas;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -20,7 +25,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     CargaTablaMedicamentos carga = new CargaTablaMedicamentos();
     TablaEntradas entradas = new TablaEntradas();
     TablaSalidas salidas = new TablaSalidas();
-    String fecha = "11-12-2016";
+//    Date date = new Date("dd-MM-yyyy");
+//    DateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+////    Calendar d = new GregorianCalendar();
+//    String dia = Integer.toString(date.get(Calendar.DATE));
+//    String mes = Integer.toString(date.get(Calendar.MONTH));
+//    String ano = Integer.toString(date.get(Calendar.YEAR));
+//    String fecha = dia + "/" + mes + "/" + ano;
+    
     
     /**
      * Creates new form PantallaPrincipal
@@ -31,7 +43,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         carga.cargaTabla();
         entradas.cargaTabla();
         salidas.cargaTabla();
-        //entradas.verificaCaducidad(fecha);
+        //entradas.verificaCaducidad();
     }
 
     /**

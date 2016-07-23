@@ -36,7 +36,7 @@ public class Conexion {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }	 
         try {
-            conectar = DriverManager.getConnection("jdbc:sqlite:medicacion.db");
+            conectar = DriverManager.getConnection("jdbc:sqlite:medicacion.db;create = true");
             st = conectar.createStatement();
             System.out.println("Conexion");
 

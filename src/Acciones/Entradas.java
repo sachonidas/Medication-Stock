@@ -5,6 +5,8 @@
  */
 package Acciones;
 
+import java.util.Date;
+
 /**
  *
  * @author l.arancibia
@@ -23,7 +25,7 @@ public class Entradas {
     public void setFechaCaducidad(String fechaCaducidad) {
         this.fechaCaducidad = fechaCaducidad;
     }
-    
+
     public String getFechaEntrada() {
         return fechaEntrada;
     }
@@ -31,7 +33,7 @@ public class Entradas {
     public void setFechaEntrada(String fechaEntrada) {
         this.fechaEntrada = fechaEntrada;
     }
-
+    
     public String getNombreMediamento() {
         return nombreMediamento;
     }
