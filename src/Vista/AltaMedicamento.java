@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -209,29 +210,31 @@ public class AltaMedicamento extends javax.swing.JFrame {
 
         //String fechaCaducidad = format1.format(txtFechaCaducidad.getDate());
         tabla = new CargaTablaMedicamentos();
-        
-        medicamento.setNombreMedicamento(txtMedicamento.getText());
-        medicamento.setDosisMedicamento(txtDosis.getText());
-        medicamento.setCantidadMedicamento(txtCantidad.getText());
-        medicamento.setMaximoMedicamento(txtMaximo.getText());
-        medicamento.setMinimoMedicamento(txtMinimo.getText());
-        //medicamento.setFechaCaducidad(fechaCaducidad);
-        medicamento.setComentarioMedicamento(txtComentarioMedicamento.getText());
-        
-        System.out.println(txtMedicamento.getText());
-        System.out.println(txtDosis.getText());
-        System.out.println(txtCantidad.getText());
-        System.out.println(txtMaximo.getText());
-        System.out.println(txtMinimo.getText());
-        
-        tabla.insertaMedicamento(medicamento);
-            
-        txtMedicamento.setText("");
-        txtDosis.setText("");
-        txtCantidad.setText("");
-        txtMaximo.setText("");
-        txtMinimo.setText("");
-        txtComentarioMedicamento.setText("");
+        if (txtMedicamento.getText().isEmpty() || txtDosis.getText().isEmpty() || txtCantidad.getText().isEmpty() || txtMaximo.getText().isEmpty() || txtMinimo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(jPanel1, "Debes rellenar todos los campos");
+        }else{
+            medicamento.setNombreMedicamento(txtMedicamento.getText());
+            medicamento.setDosisMedicamento(txtDosis.getText());
+            medicamento.setCantidadMedicamento(txtCantidad.getText());
+            medicamento.setMaximoMedicamento(txtMaximo.getText());
+            medicamento.setMinimoMedicamento(txtMinimo.getText());
+            medicamento.setComentarioMedicamento(txtComentarioMedicamento.getText());
+
+            System.out.println(txtMedicamento.getText());
+            System.out.println(txtDosis.getText());
+            System.out.println(txtCantidad.getText());
+            System.out.println(txtMaximo.getText());
+            System.out.println(txtMinimo.getText());
+
+            tabla.insertaMedicamento(medicamento);
+
+            txtMedicamento.setText("");
+            txtDosis.setText("");
+            txtCantidad.setText("");
+            txtMaximo.setText("");
+            txtMinimo.setText("");
+            txtComentarioMedicamento.setText("");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

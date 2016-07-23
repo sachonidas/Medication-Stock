@@ -129,8 +129,14 @@ public class BorrarMedicamento extends javax.swing.JFrame {
         medicamento.setNombreMedicamento(cmbMedicamentos.getSelectedItem().toString());
         
         System.out.println(cmbMedicamentos.getSelectedItem().toString());
+        int confirmado = JOptionPane.showConfirmDialog(jPanel1, "Seguro que quiere eliminar el medicamento "+ medicamento.getNombreMedicamento());
+        if (JOptionPane.OK_OPTION == confirmado) {
+            tabla.borraMedicamento(medicamento);
+        }else{
+            JOptionPane.showMessageDialog(jPanel1, "Vale...... No borro nada..... ");
+        }
         
-        tabla.borraMedicamento(medicamento);
+        
         
         dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -206,6 +212,6 @@ public class BorrarMedicamento extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

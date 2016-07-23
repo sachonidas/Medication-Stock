@@ -39,6 +39,10 @@ public class Conexion {
             conectar = DriverManager.getConnection("jdbc:sqlite:medicacion.db;create = true");
             st = conectar.createStatement();
             System.out.println("Conexion");
+//            String sql = "create database if not exist medicacion";
+//            st.execute(sql);
+//            String sql1 = "use medicacion";
+//            st.executeUpdate(sql1);
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
