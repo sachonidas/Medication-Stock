@@ -6,6 +6,7 @@
 package DB;
 
 import Acciones.Entradas;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -56,7 +57,33 @@ public class TablaEntradas {
         }
         
     }
-    
+    public void verificaCaducidad(String fechaComprueba){
+        String []datos = new String[6];
+        String []caducados = new String[60];
+        Conexion conectar = new Conexion();        
+        Statement st;
+        
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM entradas");
+            while(rs.next()){
+                for (int i = 1; i < datos.length; i++) {
+                    datos[i-1] = rs.getString("CADUCIDAD");
+                }
+                
+            }
+            conectar.desconexion();
+            rs.close();
+        } catch (Exception e) {
+        }
+        for (int i = 0; i < datos.length; i++) {
+            if (datos[i].equals("mes")) {
+                
+                JOptionPane.showMessageDialog(null, "Medicamento a punto de caducar");
+            }
+        }
+    }
     
     
 }

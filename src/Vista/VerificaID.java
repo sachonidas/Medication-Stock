@@ -42,9 +42,15 @@ public class VerificaID extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         txtContraseña = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Usuario:");
+
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Contraseña:");
 
@@ -54,16 +60,17 @@ public class VerificaID extends javax.swing.JFrame {
                 btnAcpetarActionPerformed(evt);
             }
         });
-        btnAcpetar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                btnAcpetarKeyTyped(evt);
-            }
-        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
+            }
+        });
+
+        txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraseñaKeyTyped(evt);
             }
         });
 
@@ -76,7 +83,7 @@ public class VerificaID extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAcpetar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addComponent(btnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,19 +118,7 @@ public class VerificaID extends javax.swing.JFrame {
 
     private void btnAcpetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcpetarActionPerformed
         // TODO add your handling code here:
-        AltaMedicamento alta = new AltaMedicamento();
-        if (txtUsuario.getText().isEmpty() || txtContraseña.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Debes rellenar los campos");
-        }else{
-            if (txtUsuario.getText().equals(USUARIO) && txtContraseña.getText().equals(PASS)) {
-               alta.setVisible(rootPaneCheckingEnabled);
-               dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, "Error al introducir el usuario ó la contraseña");
-                txtUsuario.setText("");
-                txtContraseña.setText("");
-            }
-        }
+        verificaDatos();
     }//GEN-LAST:event_btnAcpetarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -131,8 +126,25 @@ public class VerificaID extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnAcpetarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAcpetarKeyTyped
+    private void txtContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyTyped
         // TODO add your handling code here:
+        char teclaPulsada = evt.getKeyChar();
+        
+        if (teclaPulsada == KeyEvent.VK_ENTER) {
+            btnAcpetar.doClick();
+        }
+    }//GEN-LAST:event_txtContraseñaKeyTyped
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        // TODO add your handling code here:
+        char teclaPulsada = evt.getKeyChar();
+        
+        if (teclaPulsada == KeyEvent.VK_ENTER) {
+            btnAcpetar.doClick();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    public void verificaDatos(){
         AltaMedicamento alta = new AltaMedicamento();
         if (txtUsuario.getText().isEmpty() || txtContraseña.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debes rellenar los campos");
@@ -146,8 +158,7 @@ public class VerificaID extends javax.swing.JFrame {
                 txtContraseña.setText("");
             }
         }
-    }//GEN-LAST:event_btnAcpetarKeyTyped
-
+    }
     /**
      * @param args the command line arguments
      */

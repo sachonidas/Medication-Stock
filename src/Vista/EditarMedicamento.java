@@ -7,6 +7,11 @@ package Vista;
 
 import Acciones.Medicamento;
 import DB.CargaTablaMedicamentos;
+import DB.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +28,7 @@ public class EditarMedicamento extends javax.swing.JFrame {
     public EditarMedicamento() {
         initComponents();
         setTitle("Editar Medicamento");
+        cargaCombo();
     }
 
     /**
@@ -36,7 +42,6 @@ public class EditarMedicamento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtMedicamento = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtDosis = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -47,6 +52,7 @@ public class EditarMedicamento extends javax.swing.JFrame {
         txtMinimo = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        cmbMedicacion = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -91,11 +97,11 @@ public class EditarMedicamento extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMedicamento)
                     .addComponent(txtDosis)
                     .addComponent(txtCantidad)
                     .addComponent(txtMaximo)
-                    .addComponent(txtMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addComponent(cmbMedicacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(226, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -107,13 +113,11 @@ public class EditarMedicamento extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(txtMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(52, 52, 52)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbMedicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -172,13 +176,13 @@ public class EditarMedicamento extends javax.swing.JFrame {
         medicamento = new Medicamento();
         tabla = new CargaTablaMedicamentos();
         
-        medicamento.setNombreMedicamento(txtMedicamento.getText());
+        medicamento.setNombreMedicamento(cmbMedicacion.getSelectedItem().toString());
         medicamento.setDosisMedicamento(txtDosis.getText());
         medicamento.setCantidadMedicamento(txtCantidad.getText());
         medicamento.setMaximoMedicamento(txtMaximo.getText());
         medicamento.setMinimoMedicamento(txtMinimo.getText());
         
-        System.out.println(txtMedicamento.getText());
+        System.out.println(cmbMedicacion.getSelectedItem().toString());
         System.out.println(txtDosis.getText());
         System.out.println(txtCantidad.getText());
         System.out.println(txtMaximo.getText());
@@ -194,6 +198,29 @@ public class EditarMedicamento extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    public void cargaCombo(){
+        String[] medicamentos = new String[2];
+        Conexion conectar = new Conexion();        
+        Statement st;
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("SELECT nombre FROM medicamentos");
+            cmbMedicacion.removeAllItems();
+        while(rs.next()){
+            medicamentos[0]=rs.getString(1);
+            cmbMedicacion.addItem(medicamentos[0]);
+            //JOptionPane.showMessageDialog(this, empleados[0]);
+        }
+        //miCombo.addItem(empleados[0]);
+        rs.close();
+        conectar.desconexion();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en combo¨:" +ex);
+        }
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -232,6 +259,7 @@ public class EditarMedicamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cmbMedicacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -244,7 +272,6 @@ public class EditarMedicamento extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDosis;
     private javax.swing.JTextField txtMaximo;
-    private javax.swing.JTextField txtMedicamento;
     private javax.swing.JTextField txtMinimo;
     // End of variables declaration//GEN-END:variables
 }

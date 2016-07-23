@@ -37,8 +37,7 @@ public class CargaTablaMedicamentos {
                     " CANTIDAD          TEXT    NOT NULL,"+
                     " MAXIMO            TEXT    NOT NULL,"+
                     " MINIMO            TEXT    NOT NULL,"+
-                    " COMENTARIO        TEXT    NOT NULL,"+
-                    " CADUCIDAD         TEXT    NOT NULL)";
+                    " COMENTARIO        TEXT    NOT NULL)";
             st.execute(sql);
             st.close();
             conectar.desconexion();
@@ -57,14 +56,13 @@ public class CargaTablaMedicamentos {
         try {
             conectar.conectarBD();
             st = conectar.getConnection().createStatement();
-            String sql = "insert into medicamentos (nombre, dosis, cantidad, maximo, minimo,comentario, caducidad)"
+            String sql = "insert into medicamentos (nombre, dosis, cantidad, maximo, minimo,comentario)"
                     + "values('"+medicamento.getNombreMedicamento()+"'"
                     + ",'"+medicamento.getDosisMedicamento()+"'"
                     + ",'"+medicamento.getCantidadMedicamento()+"'"
                     + ",'"+medicamento.getMaximoMedicamento()+"'"
                     + ",'"+medicamento.getMinimoMedicamento()+"'"
-                    + ",'"+medicamento.getComentarioMedicamento()+"'"
-                    + ",'"+medicamento.getFechaCaducidad()+"')";
+                    + ",'"+medicamento.getComentarioMedicamento()+"')";
                 
             st.executeUpdate(sql);
             
@@ -93,7 +91,6 @@ public class CargaTablaMedicamentos {
                     + ", cantidad = '"+medicamento.getCantidadMedicamento()+"'"
                     + ", maximo = '"+medicamento.getMaximoMedicamento()+"'"
                     + ", minimo = '"+medicamento.getMinimoMedicamento()+"'"
-                    + ", caducidad = '"+medicamento.getFechaCaducidad()+"'"
                     + " where nombre = '"+medicamento.getNombreMedicamento()+"'");
             if (cantidad == 1) {
                 JOptionPane.showMessageDialog(null, "Medicamento modificado");
@@ -268,32 +265,6 @@ public class CargaTablaMedicamentos {
         }
     }
     
-    /*public void verificaCaducidad(String fechaComprueba){
-        String []datos = new String[6];
-        String []caducados = new String[60];
-        Conexion conectar = new Conexion();        
-        Statement st;
-        
-        try {
-            conectar.conectarBD();
-            st = conectar.getConnection().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM medicamentos");
-            while(rs.next()){
-                for (int i = 1; i < datos.length; i++) {
-                    datos[i-1] = rs.getString("CADUCIDAD");
-                }
-                
-            }
-            conectar.desconexion();
-            rs.close();
-        } catch (Exception e) {
-        }
-        for (int i = 0; i < datos.length; i++) {
-            if (datos[i].equals("mes")) {
-                
-                JOptionPane.showMessageDialog(null, "Medicamento a punto de caducar");
-            }
-        }
-    }*/
+    
     
 }

@@ -31,7 +31,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         carga.cargaTabla();
         entradas.cargaTabla();
         salidas.cargaTabla();
-        //carga.verificaCaducidad(fecha);
+        //entradas.verificaCaducidad(fecha);
     }
 
     /**

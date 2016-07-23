@@ -7,6 +7,11 @@ package Vista;
 
 import Acciones.Medicamento;
 import DB.CargaTablaMedicamentos;
+import DB.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +28,7 @@ public class BorrarMedicamento extends javax.swing.JFrame {
     public BorrarMedicamento() {
         initComponents();
         setTitle("Borrar Medicamento");
+        cargaCombo();
     }
 
     /**
@@ -36,9 +42,9 @@ public class BorrarMedicamento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtMedicamento = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        cmbMedicamentos = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -74,20 +80,18 @@ public class BorrarMedicamento extends javax.swing.JFrame {
                         .addComponent(btnCancelar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(84, 84, 84)
-                        .addComponent(txtMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(67, 67, 67)
+                        .addComponent(cmbMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(txtMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addGap(77, 77, 77)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
@@ -122,9 +126,9 @@ public class BorrarMedicamento extends javax.swing.JFrame {
         medicamento = new Medicamento();
         tabla = new CargaTablaMedicamentos();
         
-        medicamento.setNombreMedicamento(txtMedicamento.getText());
+        medicamento.setNombreMedicamento(cmbMedicamentos.getSelectedItem().toString());
         
-        System.out.println(txtMedicamento.getText());
+        System.out.println(cmbMedicamentos.getSelectedItem().toString());
         
         tabla.borraMedicamento(medicamento);
         
@@ -136,6 +140,29 @@ public class BorrarMedicamento extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    public void cargaCombo(){
+        String[] medicamentos = new String[2];
+        Conexion conectar = new Conexion();        
+        Statement st;
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("SELECT nombre FROM medicamentos");
+            cmbMedicamentos.removeAllItems();
+        while(rs.next()){
+            medicamentos[0]=rs.getString(1);
+            cmbMedicamentos.addItem(medicamentos[0]);
+            //JOptionPane.showMessageDialog(this, empleados[0]);
+        }
+        //miCombo.addItem(empleados[0]);
+        rs.close();
+        conectar.desconexion();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en combo¨:" +ex);
+        }
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -174,11 +201,11 @@ public class BorrarMedicamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cmbMedicamentos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtMedicamento;
     // End of variables declaration//GEN-END:variables
 }

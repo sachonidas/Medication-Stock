@@ -7,6 +7,11 @@ package Vista;
 
 import Acciones.Medicamento;
 import DB.CargaTablaMedicamentos;
+import DB.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +28,7 @@ public class EditarMaximos extends javax.swing.JFrame {
     public EditarMaximos() {
         initComponents();
         setTitle("Editar Maximos");
+        cargaCombo();
     }
 
     /**
@@ -36,13 +42,13 @@ public class EditarMaximos extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtMedicamento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtMaximo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtMinimo = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        cmbMedicacion = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -81,9 +87,9 @@ public class EditarMaximos extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMedicamento)
                     .addComponent(txtMaximo)
-                    .addComponent(txtMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addComponent(cmbMedicacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -95,13 +101,11 @@ public class EditarMaximos extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(txtMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(93, 93, 93)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbMedicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -148,11 +152,11 @@ public class EditarMaximos extends javax.swing.JFrame {
         medicamento = new Medicamento();
         tabla = new CargaTablaMedicamentos();
         
-        medicamento.setNombreMedicamento(txtMedicamento.getText());
+        medicamento.setNombreMedicamento(cmbMedicacion.getSelectedItem().toString());
         medicamento.setMinimoMedicamento(txtMinimo.getText());
         medicamento.setMaximoMedicamento(txtMaximo.getText());
         
-        System.out.println(txtMedicamento.getText());
+        System.out.println(cmbMedicacion.getSelectedItem().toString());
         System.out.println(txtMaximo.getText());
         System.out.println(txtMinimo.getText());
         
@@ -166,6 +170,29 @@ public class EditarMaximos extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    public void cargaCombo(){
+        String[] medicamentos = new String[2];
+        Conexion conectar = new Conexion();        
+        Statement st;
+        try {
+            conectar.conectarBD();
+            st = conectar.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("SELECT nombre FROM medicamentos");
+            cmbMedicacion.removeAllItems();
+        while(rs.next()){
+            medicamentos[0]=rs.getString(1);
+            cmbMedicacion.addItem(medicamentos[0]);
+            //JOptionPane.showMessageDialog(this, empleados[0]);
+        }
+        //miCombo.addItem(empleados[0]);
+        rs.close();
+        conectar.desconexion();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en combo¨:" +ex);
+        }
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -204,6 +231,7 @@ public class EditarMaximos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cmbMedicacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -212,7 +240,6 @@ public class EditarMaximos extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtMaximo;
-    private javax.swing.JTextField txtMedicamento;
     private javax.swing.JTextField txtMinimo;
     // End of variables declaration//GEN-END:variables
 }
