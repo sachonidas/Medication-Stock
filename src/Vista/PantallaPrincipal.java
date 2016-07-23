@@ -89,6 +89,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnSalidas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalidas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSalidas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSalidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalidasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
         pnlContenedor.setLayout(pnlContenedorLayout);
@@ -201,10 +206,20 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         mnuTablaEntradas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK));
         mnuTablaEntradas.setText("Entradas");
+        mnuTablaEntradas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTablaEntradasActionPerformed(evt);
+            }
+        });
         mnuInformes.add(mnuTablaEntradas);
 
         mnuTablaSalidas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         mnuTablaSalidas.setText("Salidas");
+        mnuTablaSalidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTablaSalidasActionPerformed(evt);
+            }
+        });
         mnuInformes.add(mnuTablaSalidas);
 
         jMenuBar1.add(mnuInformes);
@@ -277,6 +292,24 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_mnuSalirActionPerformed
+
+    private void btnSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidasActionPerformed
+        // TODO add your handling code here:
+        SalidaMedicamentos salida = new SalidaMedicamentos();
+        salida.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_btnSalidasActionPerformed
+
+    private void mnuTablaEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTablaEntradasActionPerformed
+        // TODO add your handling code here:
+        TablaEntradaMedicamentos tabla = new TablaEntradaMedicamentos();
+        tabla.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuTablaEntradasActionPerformed
+
+    private void mnuTablaSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTablaSalidasActionPerformed
+        // TODO add your handling code here:
+        TablaSalidaMedicamentos tabla = new TablaSalidaMedicamentos();
+        tabla.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuTablaSalidasActionPerformed
 
     /**
      * @param args the command line arguments

@@ -31,7 +31,7 @@ public class CargaTablaMedicamentos {
             conectar.conectarBD();
             st = conectar.getConnection().createStatement();
             String sql = "create table if not exists medicamentos"+
-                    "(ID    INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,"+
+                    "(ID    INTEGER PRIMARY KEY  NOT NULL,"+
                     " NOMBRE            TEXT    NOT NULL,"+
                     " DOSIS             TEXT    NOT NULL,"+
                     " CANTIDAD          TEXT    NOT NULL,"+

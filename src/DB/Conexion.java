@@ -8,6 +8,8 @@ package DB;
 
 import java.sql.*;
 import java.sql.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -26,22 +28,21 @@ public class Conexion {
     
     public void conectarBD(){
         
-        Statement st;
+       try {
+            Class.forName("org.sqlite.JDBC");
+        
+        }
+        catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }	 
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306","root",PASS);
-            //Mensaje opcional que certifica que te has conectado a la base de datos.
-//            JOptionPane.showMessageDialog(null, "Conectado!");
+            conectar = DriverManager.getConnection("jdbc:sqlite:medicacion.db");
             st = conectar.createStatement();
-            String sql = "CREATE DATABASE IF NOT EXISTS bd1";
-            st.executeUpdate(sql);
-            String sql1 = "USE bd1";
-            st.executeUpdate(sql1);
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+ e);
-            e.printStackTrace();
+            System.out.println("Conexion");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
         }
         
     }

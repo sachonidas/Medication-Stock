@@ -25,7 +25,7 @@ public class TablaEntradas {
             st = conectar.getConnection().createStatement();
             //PONER VALOR AUTOINCREMENT EN EL ID!
             String sql = "create table if not exists entradas"+
-                    "(ID    INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,"+
+                    "(ID    INTEGER PRIMARY KEY NOT NULL,"+
                     " FECHA             TEXT    NOT NULL,"+
                     " NOMBRE            TEXT    NOT NULL,"+
                     " CANTIDAD          TEXT    NOT NULL,"+
