@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 public class VerificaID extends javax.swing.JFrame {
 
     
-    private static final String USUARIO = "carmen";
-    private static final String PASS = "Patton2016";
+    private static final String USUARIO = "stock";
+    private static final String PASS = "Ivf2016";
     /**
      * Creates new form VerificaID
      */

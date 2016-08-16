@@ -47,7 +47,7 @@ public class BorrarMedicamento extends javax.swing.JFrame {
         cmbMedicamentos = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,11 +98,17 @@ public class BorrarMedicamento extends javax.swing.JFrame {
                 .addGap(66, 66, 66))
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenu1.setText("Archivo");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuItem1.setText("Volver");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -120,14 +126,19 @@ public class BorrarMedicamento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        
+
         medicamento = new Medicamento();
         tabla = new CargaTablaMedicamentos();
-        
+
         medicamento.setNombreMedicamento(cmbMedicamentos.getSelectedItem().toString());
-        
+
         System.out.println(cmbMedicamentos.getSelectedItem().toString());
         int confirmado = JOptionPane.showConfirmDialog(jPanel1, "Seguro que quiere eliminar el medicamento "+ medicamento.getNombreMedicamento());
         if (JOptionPane.OK_OPTION == confirmado) {
@@ -135,16 +146,14 @@ public class BorrarMedicamento extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(jPanel1, "Vale...... No borro nada..... ");
         }
-        
-        
-        
+
         dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public void cargaCombo(){
         String[] medicamentos = new String[2];
@@ -210,8 +219,8 @@ public class BorrarMedicamento extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbMedicamentos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    public javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

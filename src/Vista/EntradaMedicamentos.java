@@ -206,24 +206,39 @@ public class EntradaMedicamentos extends javax.swing.JFrame {
         String fechaCaduca = format1.format(txtFechaCaducidad.getDate());
         obtenNombre = String.valueOf(cmbMedicacion.getSelectedItem());
         
-        entradas.setNombreMediamento(obtenNombre);
-        entradas.setCantidadEntrada(txtCantidadEntrada.getText());
-        entradas.setFechaEntrada(obtenFecha);
-        entradas.setFechaCaducidad(fechaCaduca);
-        
-        tabla.insertaEntrada(entradas);
-        medicamento.entradaMedicamentos(txtCantidadEntrada.getText(),obtenNombre);
-        
-        txtCantidadEntrada.setText("");
-        txtFechaCaducidad.removeAll();
+        if (isNumeric(txtCantidadEntrada.getText().toString()) == false ) {
+            JOptionPane.showMessageDialog(null, "Debes de introducir un numero");
+        }else if(txtCantidadEntrada.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debes rellenar la cantidad a introducir");
+        }else{
+            entradas.setNombreMediamento(obtenNombre);
+            entradas.setCantidadEntrada(txtCantidadEntrada.getText());
+            entradas.setFechaEntrada(obtenFecha);
+            entradas.setFechaCaducidad(fechaCaduca);
+
+            tabla.insertaEntrada(entradas);
+            medicamento.entradaMedicamentos(txtCantidadEntrada.getText(),obtenNombre);
+
+            txtCantidadEntrada.setText("");
+            txtFechaCaducidad.removeAll();
+        }
         
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    public static boolean isNumeric(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     private void cmbMedicacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMedicacionItemStateChanged
         // TODO add your handling code here:
         
     }//GEN-LAST:event_cmbMedicacionItemStateChanged
 
+    
     /**
      * @param args the command line arguments
      */

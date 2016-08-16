@@ -55,7 +55,7 @@ public class EditarMedicamento extends javax.swing.JFrame {
         cmbMedicacion = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,11 +148,17 @@ public class EditarMedicamento extends javax.swing.JFrame {
                 .addGap(48, 48, 48))
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenu1.setText("Archivo");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuItem1.setText("Volver");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -175,28 +181,37 @@ public class EditarMedicamento extends javax.swing.JFrame {
         
         medicamento = new Medicamento();
         tabla = new CargaTablaMedicamentos();
-        
-        medicamento.setNombreMedicamento(cmbMedicacion.getSelectedItem().toString());
-        medicamento.setDosisMedicamento(txtDosis.getText());
-        medicamento.setCantidadMedicamento(txtCantidad.getText());
-        medicamento.setMaximoMedicamento(txtMaximo.getText());
-        medicamento.setMinimoMedicamento(txtMinimo.getText());
-        
-        System.out.println(cmbMedicacion.getSelectedItem().toString());
-        System.out.println(txtDosis.getText());
-        System.out.println(txtCantidad.getText());
-        System.out.println(txtMaximo.getText());
-        System.out.println(txtMinimo.getText());
-        
-        tabla.modificaMedicamento(medicamento);
-        
-        dispose();
+        if (txtDosis.getText().isEmpty() || txtCantidad.getText().isEmpty() || txtMaximo.getText().isEmpty() || txtMinimo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debes de rellenar todos los campos.");
+        } else {
+
+            medicamento.setNombreMedicamento(cmbMedicacion.getSelectedItem().toString());
+            medicamento.setDosisMedicamento(txtDosis.getText());
+            medicamento.setCantidadMedicamento(txtCantidad.getText());
+            medicamento.setMaximoMedicamento(txtMaximo.getText());
+            medicamento.setMinimoMedicamento(txtMinimo.getText());
+
+            System.out.println(cmbMedicacion.getSelectedItem().toString());
+            System.out.println(txtDosis.getText());
+            System.out.println(txtCantidad.getText());
+            System.out.println(txtMaximo.getText());
+            System.out.println(txtMinimo.getText());
+
+            tabla.modificaMedicamento(medicamento);
+
+            dispose();
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public void cargaCombo(){
         String[] medicamentos = new String[2];
@@ -266,8 +281,8 @@ public class EditarMedicamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDosis;

@@ -72,7 +72,6 @@ public class SalidaMedicamentos extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuVolver = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -153,7 +152,7 @@ public class SalidaMedicamentos extends javax.swing.JFrame {
                 .addGap(107, 107, 107))
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Archivo");
 
         mnuVolver.setText("Volver");
         mnuVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -164,9 +163,6 @@ public class SalidaMedicamentos extends javax.swing.JFrame {
         jMenu1.add(mnuVolver);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -297,7 +293,6 @@ public class SalidaMedicamentos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

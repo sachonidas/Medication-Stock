@@ -214,12 +214,12 @@ public class CargaTablaMedicamentos {
         
         
         int cantidadActual = Integer.valueOf(medicamento.getCantidadMedicamento());
-        JOptionPane.showMessageDialog(null, cantidadActual);
+        //JOptionPane.showMessageDialog(null, cantidadActual);
         int cantidadEntrada = Integer.valueOf(cantidad);
-        JOptionPane.showMessageDialog(null, cantidadEntrada);
+        //JOptionPane.showMessageDialog(null, cantidadEntrada);
         int cantidadFinal = cantidadActual + cantidadEntrada;
         String cantidadActualizada = String.valueOf(cantidadFinal);
-        JOptionPane.showMessageDialog(null, cantidadFinal);
+        //JOptionPane.showMessageDialog(null, cantidadFinal);
         medicamento.setCantidadMedicamento(cantidadActualizada);
         
         
@@ -228,7 +228,7 @@ public class CargaTablaMedicamentos {
                     + " where nombre = '"+medicamento.getNombreMedicamento()+"'";
         st.executeUpdate(sql);
 //            modificaMedicamento(medicamento);
-        
+        JOptionPane.showMessageDialog(null, "Entrada de medicamento hecha!!!!");
         conectar.desconexion();
         rs.close();
         } catch (SQLException ex) {
